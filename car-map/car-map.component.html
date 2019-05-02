@@ -1,0 +1,29 @@
+<agm-map [latitude]="maplocation.latitude" [longitude]="maplocation.longitude" [zoom]="14">
+  <agm-marker *ngFor="let car of carlist"
+      [latitude]="car.location.latitude" [longitude]="car.location.longitude" [iconUrl]="caricon" [markerClickable]="true" >
+    <agm-snazzy-info-window [closeOnMapClick]="true" [closeWhenOthersOpen]="true" [maxWidth]="1000" [maxHeight]="1000" >
+        <ng-template>
+          <div class="si-frame">
+            <div>
+              <div>
+                <img [src]="car.imageUrl">
+              </div>
+              <div class="carName">
+                {{car.name}}
+              </div>
+              <div class="carType">
+                {{car.type}}
+              </div>
+              <div>
+                {{car.address}}
+              </div>
+              <div class="bookButtonDiv">
+                <button class="bookButton" attr.data-id="{{car.id}}" (click)="book($event)">Book</button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </agm-snazzy-info-window>
+  </agm-marker>
+  <agm-marker *ngIf="userlocation" [latitude]="userlocation.latitude" [longitude]="userlocation.longitude" [iconUrl]="usericon" ></agm-marker>
+</agm-map>
